@@ -17,7 +17,7 @@ function Invoke-Git {
 Invoke-Git push origin main --progress
 
 $tracked = [System.Collections.Generic.HashSet[string]]::new(
-  [string[]]@(git -C $Site ls-files "*.mp3"),
+  [string[]]@(git -c core.quotePath=false -C $Site ls-files "*.mp3"),
   [System.StringComparer]::OrdinalIgnoreCase
 )
 $pending = @(
