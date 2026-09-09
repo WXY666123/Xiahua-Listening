@@ -1,6 +1,6 @@
 param(
   [string]$Site = "C:\Users\29806\Documents\ChatGPT\雅思听力网页版",
-  [int]$BatchSize = 10
+  [int]$BatchSize = 2
 )
 
 $ErrorActionPreference = "Stop"
