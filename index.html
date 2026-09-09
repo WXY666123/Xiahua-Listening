@@ -1,0 +1,2754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>虾滑老师雅思听力题合集</title>
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --bg-dim: #f3f2eb;
+      --panel: #ffffff;
+      --line: #e8e4d8;
+      --line-2: #d6d2c4;
+      --ink: #1a1816;
+      --ink-2: #4a4640;
+      --muted: #8a847a;
+      --accent: #dd5a2a;
+      --accent-ink: #b94517;
+      --accent-bg: #fbeae0;
+      --ok: #2e7d4f;
+      --ok-bg: #e6f2ea;
+      --bad: #c4392b;
+      --bad-bg: #fbe9e7;
+      --warn: #b88420;
+      --warn-bg: #fbf1dd;
+      --info: #1e4d6b;
+      --info-bg: #e4eef5;
+      --shadow: 0 6px 24px -8px rgba(60, 40, 15, 0.12);
+      --shadow-lg: 0 18px 48px -12px rgba(60, 40, 15, 0.18);
+      --hf-bg: var(--ok-bg);
+      --hf-bd: var(--ok);
+      --mhf-bg: var(--warn-bg);
+      --mhf-bd: var(--warn);
+      --lf-bg: var(--bad-bg);
+      --lf-bd: var(--bad);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Manrope", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr);
+      height: 100vh;
+      max-height: 100vh;
+    }
+
+    .side {
+      background: var(--bg);
+      border-right: 1.5px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      overflow-y: auto;
+    }
+
+    .side-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 0 20px 24px;
+    }
+
+    .side-brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    .side-brand-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .side-brand-name {
+      font-weight: 800;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .side-brand-tag {
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .side-nav {
+      padding: 0 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .side-nav-section {
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 16px 8px 6px;
+    }
+
+    .side-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 9px 10px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--ink-2);
+      text-align: left;
+      font-size: 13.5px;
+      font-weight: 700;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .side-nav-item:hover,
+    .side-nav-item.on {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+
+    .side-nav-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .side-nav-group {
+      padding: 0;
+    }
+
+    .side-nav-group summary {
+      list-style: none;
+    }
+
+    .side-nav-group summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .side-nav-group summary.side-nav-item::after {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-left: auto;
+      border-right: 1.7px solid currentColor;
+      border-bottom: 1.7px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.14s;
+    }
+
+    .side-nav-group[open] summary.side-nav-item::after {
+      transform: rotate(225deg);
+    }
+
+    .side-subnav {
+      display: grid;
+      gap: 2px;
+      padding: 4px 0 4px 28px;
+    }
+
+    .side-subnav .side-nav-item {
+      font-size: 13px;
+      padding: 9px 10px;
+    }
+
+    .side-foot {
+      border-top: 1.5px solid var(--line);
+      padding: 16px 20px 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    main {
+      overflow-y: auto;
+      background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 48%, var(--bg-dim) 100%);
+      padding: 36px 48px 60px;
+    }
+
+    .page-kicker {
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .source-line {
+      margin: -4px 0 18px;
+      color: var(--ink-2);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .source-line a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .source-line a:hover {
+      text-decoration: underline;
+    }
+
+    .source-contact {
+      display: inline-block;
+      margin-left: 18px;
+      color: var(--ink-2);
+    }
+
+    .page-sub {
+      max-width: 70ch;
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 15px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 370px;
+      gap: 28px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .hero-actions,
+    .toolbar,
+    .legend,
+    .legend-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-actions,
+    .toolbar {
+      margin-top: 22px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      align-content: start;
+      margin-top: 16px;
+      max-width: 920px;
+      width: 100%;
+      justify-self: end;
+    }
+
+    .stat-tile,
+    .overall-wrap,
+    .card,
+    .part-card,
+    .wrongbook-card,
+    .modal-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-tile {
+      border-radius: 10px;
+      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+      min-height: 86px;
+      box-shadow: 0 10px 28px -18px rgba(60, 40, 15, 0.22);
+    }
+
+    .stat-tile.wide {
+      grid-column: 1 / -1;
+    }
+
+    .stat-tile.is-hidden {
+      display: none;
+    }
+
+    .stat-label {
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 9px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-value {
+      color: var(--ink);
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-value.is-empty {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink-2);
+    }
+
+    .stat-value small {
+      display: block;
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .btn,
+    .action-btn,
+    .legend button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1.5px solid var(--line-2);
+      background: var(--panel);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.13s, border-color 0.13s, box-shadow 0.13s, background 0.13s, opacity 0.13s;
+    }
+
+    .btn:hover,
+    .action-btn:hover,
+    .legend button:hover {
+      transform: translateY(-1px);
+      border-color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary,
+    .action-btn.primary {
+      color: var(--bg);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .action-btn.danger,
+    .action-btn.inline-danger {
+      color: var(--bad);
+      background: var(--bad-bg);
+      border-color: rgba(196, 57, 43, 0.35);
+    }
+
+    .action-btn.icon-danger {
+      width: 30px;
+      height: 30px;
+      min-height: 30px;
+      padding: 0;
+      border-radius: 999px;
+      color: var(--bad);
+      background: var(--bad-bg);
+      border-color: rgba(196, 57, 43, 0.28);
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .action-btn.compact {
+      min-height: 30px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      gap: 5px;
+    }
+
+    .legend {
+      margin-top: 0;
+      display: grid;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+	    .legend-filter-row {
+	      display: grid;
+	      grid-template-columns: 64px minmax(0, 1fr);
+	      gap: 12px;
+	      align-items: center;
+	    }
+
+	    .legend-label {
+	      color: var(--ink);
+	      font-size: 15px;
+	      font-weight: 950;
+	      letter-spacing: 0;
+	      text-align: right;
+	    }
+
+    .legend button.is-off {
+      opacity: 0.42;
+      box-shadow: none;
+    }
+
+    .legend i,
+    .legend-static i {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .legend-static {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1.5px solid var(--line-2);
+      background: var(--panel);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: default;
+    }
+
+    .legend-static[data-wrong-frequency] {
+      cursor: pointer;
+    }
+
+    .legend-static.is-off {
+      opacity: 0.42;
+      box-shadow: none;
+    }
+
+    .search-input {
+      height: 40px;
+      min-width: 280px;
+      padding: 0 14px;
+      border: 1.5px solid var(--line-2);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--ink);
+      outline: none;
+      font-weight: 650;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(221, 90, 42, 0.13);
+    }
+
+    .overall-wrap {
+      position: relative;
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .overall-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      color: var(--accent);
+      background: var(--accent-bg);
+      font-weight: 800;
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    .overall-tip {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 250px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.16s, transform 0.16s;
+      z-index: 20;
+    }
+
+    .overall-wrap:hover .overall-tip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .overall-tip-list {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .overall-tip-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tools-wrap {
+      position: relative;
+    }
+
+    .tools-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      min-width: 180px;
+      padding: 8px;
+      display: grid;
+      gap: 8px;
+      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-lg);
+      z-index: 30;
+    }
+
+    .tools-menu[hidden],
+    .modal[hidden],
+    [hidden] {
+      display: none;
+    }
+
+    .tools-menu .action-btn {
+      width: 100%;
+    }
+
+    .auth-status {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .auth-status strong {
+      color: var(--ink);
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .section-header h2,
+    .card h3,
+    .wrongbook-card h3,
+    .modal-head h3 {
+      margin: 0;
+      color: var(--ink);
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .section-header h2 {
+      font-size: 24px;
+    }
+
+    .section-header .desc,
+    .modal-meta,
+    .empty,
+    .search-empty {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .part-card {
+      border-radius: 14px;
+      overflow: hidden;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+    }
+
+    .part-head {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    .part-head h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .part-total {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      white-space: nowrap;
+    }
+
+    .part-body {
+      flex: 1;
+      overflow: visible;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(138, 132, 122, 0.45) transparent;
+    }
+
+    .freq-block {
+      padding: 14px 16px 16px;
+      border-bottom: 1px solid var(--line);
+      border-left: 5px solid var(--line-2);
+      background: var(--panel);
+    }
+
+    .freq-block:last-child {
+      border-bottom: 0;
+    }
+
+    .freq-block.high {
+      background: var(--ok-bg);
+      border-left-color: var(--ok);
+    }
+
+    .freq-block.mid {
+      background: var(--warn-bg);
+      border-left-color: var(--warn);
+    }
+
+    .freq-block.low {
+      background: var(--bad-bg);
+      border-left-color: var(--bad);
+    }
+
+    .freq-title {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .freq-title strong {
+      font-size: 14px;
+    }
+
+    .freq-title span {
+      color: var(--muted);
+      font-size: 13px;
+      font-family: Consolas, "JetBrains Mono", monospace;
+      white-space: nowrap;
+    }
+
+    .question-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .question-view-gallery .question-list {
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      align-items: stretch;
+    }
+
+    .question-view-gallery .question-item {
+      min-height: 104px;
+      padding: 10px;
+      border: 1px solid rgba(214, 210, 196, 0.9);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.74);
+      align-content: space-between;
+      transition: transform 0.13s, box-shadow 0.13s, border-color 0.13s;
+    }
+
+    .question-view-gallery .question-item:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .question-view-gallery .question-list a {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      min-height: 44px;
+    }
+
+    .question-view-gallery .question-list a:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .question-view-list .question-list {
+      grid-template-columns: 1fr;
+    }
+
+    .question-item {
+      display: grid;
+      gap: 6px;
+    }
+
+    .question-list a {
+      display: block;
+      padding: 10px 12px;
+      border: 1px solid rgba(214, 210, 196, 0.9);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.35;
+      word-break: break-word;
+      transition: transform 0.13s, box-shadow 0.13s, border-color 0.13s;
+    }
+
+    .question-list a:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 0 2px;
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line-2);
+      color: var(--muted);
+    }
+
+    .stat-badge.done {
+      color: var(--ok);
+      background: var(--ok-bg);
+      border-color: rgba(46, 125, 79, 0.28);
+    }
+
+    .stat-badge.wrong {
+      color: var(--bad);
+      background: var(--bad-bg);
+      border-color: rgba(196, 57, 43, 0.28);
+    }
+
+    .stat-badge.pending {
+      color: var(--warn);
+      background: var(--warn-bg);
+      border-color: rgba(184, 132, 32, 0.28);
+    }
+
+    .last-time {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .wrongbook-card {
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      box-shadow: none;
+    }
+
+    .wrongbook-card h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .wrong-list {
+      display: grid;
+      gap: 10px;
+      overflow-y: visible;
+      padding-right: 4px;
+    }
+
+    .wrong-item,
+    .card {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .wrong-item {
+      display: block;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .wrong-item summary {
+      list-style: none;
+    }
+
+    .wrong-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .wrong-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      cursor: pointer;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+    }
+
+    .wrong-summary:hover {
+      background: var(--bg-dim);
+    }
+
+    .wrong-summary.is-selected {
+      background: var(--accent-bg);
+    }
+
+    .wrong-summary.freq-high {
+      background: var(--ok-bg);
+    }
+
+    .wrong-summary.freq-mid {
+      background: var(--warn-bg);
+    }
+
+    .wrong-summary.freq-low {
+      background: var(--bad-bg);
+    }
+
+    .wrong-summary.freq-high:hover,
+    .wrong-summary.freq-mid:hover,
+    .wrong-summary.freq-low:hover {
+      filter: brightness(0.985);
+    }
+
+    .wrong-summary-main {
+      min-width: 0;
+    }
+
+    .wrong-summary-title {
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .wrong-summary-meta {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .wrong-summary-side {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .wrong-detail-list {
+      display: grid;
+      gap: 8px;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      max-height: none;
+      overflow-y: visible;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(138, 132, 122, 0.45) transparent;
+    }
+
+    .wrong-detail-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .wrong-detail-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .wrong-detail-list::-webkit-scrollbar-thumb {
+      background: rgba(138, 132, 122, 0.45);
+      border-radius: 999px;
+    }
+
+    .wrong-detail-row {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(232, 228, 216, 0.78);
+      font-size: 13px;
+    }
+
+    .wrong-detail-row:last-child {
+      border-bottom: 0;
+    }
+
+    .wrong-detail-label {
+      color: var(--muted);
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-weight: 800;
+    }
+
+    .wrong-answer-bad {
+      color: var(--bad);
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .wrong-answer-ok {
+      color: var(--ok);
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .wrong-item-top,
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .wrong-item-title {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .wrong-item-sub {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .wrong-item-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(26, 24, 22, 0.42);
+    }
+
+    .modal-panel {
+      width: min(980px, 100%);
+      max-height: 86vh;
+      overflow: auto;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .intro-panel {
+      width: min(600px, calc(100vw - 36px));
+      display: grid;
+      gap: 11px;
+    }
+
+    .intro-kicker {
+      display: none;
+    }
+
+    .intro-title,
+    .intro-section-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .intro-section {
+      display: grid;
+      gap: 7px;
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      background: rgba(251, 234, 224, 0.42);
+    }
+
+    .intro-section:nth-child(2) {
+      border-left-color: var(--info);
+      background: rgba(228, 238, 245, 0.58);
+    }
+
+    .intro-section:nth-child(3) {
+      border-left-color: var(--ok);
+      background: rgba(230, 242, 234, 0.58);
+    }
+
+    .intro-section:nth-child(2) .intro-section-title {
+      color: var(--info);
+    }
+
+    .intro-section:nth-child(3) .intro-section-title {
+      color: var(--ok);
+    }
+
+
+    .intro-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--ink-2);
+      font-size: 12.8px;
+      font-weight: 650;
+      line-height: 1.52;
+    }
+
+    .intro-mini {
+      margin: 0;
+      color: var(--ink-2);
+      font-size: 12.6px;
+      font-weight: 750;
+      line-height: 1.48;
+    }
+
+    .intro-help-action {
+      justify-self: center;
+      min-width: 170px;
+      height: 36px;
+      margin-top: 2px;
+    }
+
+    .intro-links {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(92px, max-content));
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .intro-link {
+      display: grid;
+      place-items: center;
+      min-width: 92px;
+      min-height: 34px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--ink);
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .intro-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+
+    .intro-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 0;
+    }
+
+    .intro-start {
+      min-width: 220px;
+      height: 42px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    @media (max-width: 720px) {
+      .intro-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .wrongbook-page-panel {
+      width: min(1240px, calc(100vw - 36px));
+      height: calc(100vh - 36px);
+      max-height: none;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .wrongbook-page-body {
+      overflow-y: auto;
+      padding-right: 4px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .wrongbook-section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .wrongbook-part-block {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg);
+      padding: 14px;
+      min-height: 120px;
+    }
+
+    .wrongbook-part-title {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .wrongbook-part-block .wrong-list {
+      max-height: 186px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .wrongbook-search {
+      width: min(420px, 100%);
+      height: 40px;
+      padding: 0 14px;
+      border: 1.5px solid var(--line-2);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--ink);
+      outline: none;
+      font-weight: 650;
+    }
+
+    .wrongbook-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0 0;
+    }
+
+    .wrongbook-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(221, 90, 42, 0.13);
+    }
+
+    .page-panel[hidden] {
+      display: none;
+    }
+
+    .wrongbook-view {
+      min-height: calc(100vh - 96px);
+    }
+
+    .tool-view-head,
+    .wrongbook-view-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 22px;
+    }
+
+    .tool-page .tool-view-head {
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tool-page .page-kicker {
+      margin-bottom: 8px;
+    }
+
+    .tool-page .page-title {
+      margin-bottom: 4px;
+    }
+
+    .wrongbook-layout {
+      display: block;
+    }
+
+    .wrongbook-list-pane {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .wrongbook-detail-pane {
+      position: relative;
+      max-height: none;
+      border-radius: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .wrongbook-results-list > .wrongbook-detail-pane {
+      margin: -4px 0 8px;
+    }
+
+    .question-list > .wrongbook-detail-pane {
+      margin: 2px 0 10px;
+      list-style: none;
+    }
+
+    .wrongbook-detail-empty {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .wrongbook-detail-title {
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .wrongbook-detail-meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .wrongbook-detail-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .wrongbook-detail-table {
+      display: grid;
+      gap: 8px;
+    }
+
+	    .wrongbook-detail-card {
+	      border: 1px solid var(--line);
+	      border-radius: 10px;
+	      background: var(--bg);
+	      padding: 11px 12px;
+	      display: grid;
+	      gap: 6px;
+	      font-size: 13px;
+	    }
+
+	    .wrongbook-answer-card {
+	      padding: 7px 10px;
+	      gap: 3px;
+	      font-size: 12px;
+	      line-height: 1.32;
+	    }
+
+	    .wrongbook-answer-card .wrong-detail-label,
+	    .wrongbook-answer-card .wrong-answer-bad,
+	    .wrongbook-answer-card .wrong-answer-ok {
+	      line-height: 1.28;
+	    }
+
+	    .wrongbook-slide {
+	      min-height: 0;
+	      align-content: start;
+	    }
+
+    .wrongbook-single-record-detail {
+      display: grid;
+      gap: 8px;
+      margin-top: 0;
+    }
+
+	    .wrongbook-detail-actions button:disabled {
+	      opacity: 0.42;
+	      cursor: not-allowed;
+	    }
+
+
+
+    .help-page {
+      max-width: 900px;
+    }
+
+    .help-lead {
+      max-width: 780px;
+      margin: -4px 0 20px;
+      color: var(--ink-2);
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.75;
+    }
+
+    .help-quick {
+      margin: 18px 0 28px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .help-quick-title,
+    .help-qa-title {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .help-quick ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--ink-2);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.8;
+      columns: 2;
+      column-gap: 34px;
+    }
+
+    .help-quick li {
+      break-inside: avoid;
+      margin-bottom: 4px;
+    }
+
+
+
+    .help-category {
+      margin-top: 16px;
+      padding-top: 0;
+    }
+
+    .help-category:first-of-type {
+      margin-top: 18px;
+    }
+
+    .help-category-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 0;
+      padding: 13px 44px 13px 16px;
+      border-left: 5px solid var(--accent);
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.35;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .help-category-title::-webkit-details-marker {
+      display: none;
+    }
+
+    .help-category-title::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(221, 90, 42, 0.22);
+      flex-shrink: 0;
+    }
+
+    .help-category-title::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: translateY(-65%) rotate(45deg);
+      transition: transform 0.14s;
+    }
+
+    .help-category[open] .help-category-title {
+      border-radius: 10px 10px 0 0;
+    }
+
+    .help-category[open] .help-category-title::after {
+      transform: translateY(-35%) rotate(225deg);
+    }
+
+    .help-category .help-faq {
+      border-top: 0;
+      border-right: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      background: rgba(255,255,255,.62);
+    }
+
+    .help-category .help-item summary {
+      padding-left: 16px;
+    }
+
+    .help-category .help-answer {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .help-faq {
+      border-top: 1px solid var(--line);
+    }
+
+    .help-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .help-item summary {
+      position: relative;
+      list-style: none;
+      padding: 16px 34px 16px 0;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.5;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .help-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .help-item summary::after {
+      content: "";
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: translateY(-65%) rotate(45deg);
+      transition: transform 0.14s;
+      color: var(--muted);
+    }
+
+    .help-item[open] summary {
+      color: var(--accent);
+    }
+
+    .help-item[open] summary::after {
+      transform: translateY(-35%) rotate(225deg);
+      color: var(--accent);
+    }
+
+    .help-answer {
+      max-width: 780px;
+      padding: 0 0 18px;
+    }
+
+    .help-answer p {
+      margin: 0 0 8px;
+      color: var(--ink-2);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.75;
+    }
+
+    .help-answer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .help-answer ul,
+    .help-answer ol {
+      margin: 0 0 8px;
+      padding-left: 20px;
+      color: var(--ink-2);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.75;
+    }
+
+    .help-answer li + li {
+      margin-top: 4px;
+    }
+
+    .help-note {
+      margin-top: 8px;
+      color: var(--accent-ink);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.65;
+    }
+
+    .help-code {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 6px;
+      background: var(--bg-dim);
+      color: var(--ink);
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    @media (max-width: 900px) {
+      .help-quick ul {
+        columns: 1;
+      }
+    }
+
+    .tool-page {
+      min-height: calc(100vh - 96px);
+    }
+
+    .filter-toolbar {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 20px;
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-label {
+      width: 76px;
+      flex-shrink: 0;
+      color: var(--muted);
+      font-family: Consolas, "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .filter-btn {
+      height: 34px;
+      padding: 0 14px;
+      border: 1px solid var(--line-2);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--ink-2);
+      font-weight: 750;
+    }
+
+    .filter-btn.on {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--bg);
+    }
+
+    .filter-btn i {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      margin-right: 7px;
+      border-radius: 999px;
+      vertical-align: 1px;
+    }
+
+    .filter-search {
+      width: min(460px, 100%);
+      height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--line-2);
+      border-radius: 10px;
+      background: var(--panel);
+      color: var(--ink);
+      outline: none;
+      font-weight: 700;
+    }
+
+    .filter-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(221, 90, 42, 0.13);
+    }
+
+    .filter-summary {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .filter-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .wrongbook-filter-panel {
+      margin-top: 18px;
+      margin-bottom: 20px;
+    }
+
+    .wrongbook-results-list {
+      display: grid;
+      gap: 30px;
+    }
+
+    .wrongbook-question-item {
+      cursor: pointer;
+    }
+
+    .wrongbook-question-item.is-selected > a {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+      box-shadow: var(--shadow);
+    }
+
+    .wrong-passage-card {
+      position: relative;
+      min-height: 58px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 0;
+      border-left: 4px solid var(--mhf-bd);
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: var(--panel);
+      cursor: pointer;
+      transition: background .13s, border-color .13s;
+    }
+
+	    .wrong-passage-card:hover,
+	    .wrong-passage-card:focus-visible,
+	    .wrong-passage-card.is-selected {
+	      background: var(--accent-bg);
+	      border-color: var(--accent);
+      outline: none;
+    }
+
+    .wrong-passage-card.freq-high {
+      border-left-color: var(--hf-bd);
+    }
+
+    .wrong-passage-card.freq-medium,
+    .wrong-passage-card.freq-mid {
+      border-left-color: var(--mhf-bd);
+    }
+
+    .wrong-passage-card.freq-low {
+      border-left-color: var(--lf-bd);
+    }
+
+    .wrong-passage-title {
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .wrong-passage-meta {
+      justify-content: flex-start;
+    }
+
+    .wrong-passage-side {
+      display: grid;
+      justify-items: end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .wrong-passage-open {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .wrong-passage-chevron {
+      color: var(--muted);
+      font-size: 20px;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .suite-panel {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(37,99,235,.08), rgba(221,90,42,.08)), var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .suite-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .suite-title {
+      font-size: 18px;
+      font-weight: 850;
+      color: var(--ink);
+    }
+
+    .suite-desc {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    .suite-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .suite-part-card {
+      border: 1px solid var(--line-2);
+      border-radius: 14px;
+      background: rgba(255,255,255,.76);
+      padding: 12px;
+      min-height: 96px;
+    }
+
+    .suite-part-label {
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .suite-part-title {
+      font-size: 13px;
+      font-weight: 760;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .suite-history {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .suite-record {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .suite-record-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .suite-record-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .suite-record-detail {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.7);
+      border: 1px solid var(--line-2);
+    }
+
+    .suite-record.open .suite-record-detail { display: grid; gap: 8px; }
+
+    .wrongbook-detail-pane .wrongbook-single-record-detail {
+      display: grid;
+      gap: 8px;
+    }
+
+    .suite-record-part {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .suite-record-action {
+      justify-self: start;
+      margin-top: 4px;
+    }
+
+    .suite-history-pager {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .suite-history-page {
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .modal-head {
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .modal-head h3 {
+      margin-bottom: 6px;
+      font-size: 22px;
+    }
+
+    .detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .detail-table th,
+    .detail-table td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .detail-table th {
+      background: var(--bg-dim);
+    }
+
+    .result-ok {
+      color: var(--ok);
+      font-weight: 800;
+    }
+
+    .result-bad {
+      color: var(--bad);
+      font-weight: 800;
+    }
+
+    .search-empty {
+      margin: 10px 0 0;
+    }
+
+    .toolbar-contact {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+	    @media (max-width: 1320px) {
+	      .grid {
+	        grid-template-columns: 1fr;
+	      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      body {
+        overflow: auto;
+      }
+      .app {
+        display: block;
+        height: auto;
+        max-height: none;
+      }
+      .side {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-right: 0;
+        border-bottom: 1.5px solid var(--line);
+        padding: 12px 0;
+        max-height: 48vh;
+      }
+      .side-brand {
+        padding-bottom: 12px;
+      }
+      main {
+        overflow: visible;
+        padding: 24px 16px 40px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .page-title {
+        font-size: 30px;
+      }
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+      .search-input {
+        min-width: 100%;
+      }
+      .toolbar-contact {
+        margin-left: 0;
+        width: 100%;
+        text-align: left;
+      }
+      .wrongbook-layout {
+        grid-template-columns: 1fr;
+      }
+      .wrongbook-detail-pane {
+        position: static;
+        max-height: none;
+      }
+      .wrongbook-section-grid {
+        grid-template-columns: 1fr;
+      }
+      .filter-label {
+        width: 100%;
+      }
+    }
+  </style>
+  <style>
+    .settings-launch{position:absolute;top:20px;right:24px;z-index:6;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);padding:8px 13px;font-weight:800;box-shadow:0 6px 18px rgba(37,31,24,.08)}
+    .settings-launch:hover{border-color:#93c5fd;background:#eff6ff}.settings-launch svg{width:16px;height:16px}.settings-panel{width:min(620px,calc(100vw - 36px));display:grid;gap:18px}.settings-section-title{margin:0;font-size:18px}.settings-description{margin:4px 0 0;color:var(--muted);font-size:13px}.settings-list{display:grid;gap:12px}.settings-row{display:grid;grid-template-columns:minmax(170px,.8fr) minmax(260px,1.2fr);gap:18px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}.settings-row-copy strong{display:block;margin-bottom:3px}.settings-row-copy span{color:var(--muted);font-size:12px}.settings-options{display:grid;grid-template-columns:1fr 1fr;gap:7px}.settings-option{position:relative}.settings-option input{position:absolute;opacity:0;pointer-events:none}.settings-option span{display:flex;min-height:38px;align-items:center;justify-content:center;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel);font-size:12px;font-weight:800;text-align:center;cursor:pointer}.settings-option input:checked+span{border-color:#60a5fa;background:#dbeafe;color:#1d4ed8}.settings-option input:focus-visible+span{outline:2px solid #60a5fa;outline-offset:2px}.settings-actions{display:flex;justify-content:flex-end}.hero{position:relative}@media(max-width:820px){.settings-launch{top:12px;right:12px;padding:7px 10px}.settings-launch span{display:none}.settings-row{grid-template-columns:1fr}.settings-options{grid-template-columns:1fr}}
+    .hero-stats{padding-top:42px}@media(max-width:820px){.hero-stats{padding-top:0}.page-title{padding-right:52px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="side-brand">
+        <div class="side-brand-mark">虾</div>
+        <div class="side-brand-text">
+          <div class="side-brand-name">虾滑雅思听力合集</div>
+          <div class="side-brand-tag">Listening Lab</div>
+        </div>
+      </div>
+
+      <nav class="side-nav" aria-label="页面导航">
+        <div class="side-nav-section">Library</div>
+        <details class="side-nav-group" open>
+          <summary class="side-nav-item on" data-jump="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3V10.5z"/></svg>
+            首页总览
+          </summary>
+	        </details>
+        <button id="open-suite-btn" class="side-nav-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/><path d="M8 5v14"/></svg>
+          套题匹配
+        </button>
+        <button id="open-wrongbook-btn" class="side-nav-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>
+          错题本
+        </button>
+        <div class="side-nav-section">Tools</div>
+        <button id="export-wrongbook-btn" class="side-nav-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span class="side-nav-label">保存答题记录</span>
+        </button>
+        <button id="import-wrongbook-btn" class="side-nav-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9"/><path d="m7 14 5-5 5 5"/><path d="M5 3h14"/></svg>
+          <span class="side-nav-label">导入答题记录</span>
+        </button>
+        <button id="auth-login-btn" class="side-nav-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="M9 12l2 2 4-5"/></svg>
+          <span class="side-nav-label">解锁 VIP</span>
+        </button>
+        <button id="open-help-btn" class="side-nav-item" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.8-2.5 2.1-2.5 4"/><path d="M12 17h.01"/></svg>
+          <span class="side-nav-label">新手必看</span>
+        </button>
+      </nav>
+
+      <div class="side-foot">
+        <strong>免费分享，禁止售卖</strong>
+        <span id="auth-status" class="auth-status">未解锁：普通题和套题可用</span>
+      </div>
+    </aside>
+
+    <main id="top">
+      <div id="library-page" class="page-panel">
+      <header class="hero">
+        <button id="open-settings-btn" class="settings-launch" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.6v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3V9.6h.09A1.7 1.7 0 0 0 4.6 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.09A1.7 1.7 0 0 0 15.5 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.17.38.42.72.75.98.31.25.7.39 1.1.4H21v4h-.09A1.7 1.7 0 0 0 19.4 15z"/></svg><span>设置</span></button>
+        <div>
+          <div class="page-kicker">IELTS Listening</div>
+          <h1 class="page-title">虾滑老师雅思听力题合集</h1>
+          <div class="source-line">小红书：<a href="https://xhslink.com/m/7y4vmscmFuE" target="_blank" rel="noopener noreferrer">Listening永不虾滑</a></div>
+
+		          <div class="legend" aria-label="筛选条件">
+		            <div class="legend-filter-row">
+		              <span class="legend-label">版本</span>
+		              <div class="legend-group">
+		                <button id="legend-section-normal-btn" type="button" data-section="普通"><b id="legend-section-normal-count">普通</b></button>
+		                <button id="legend-section-vip-btn" type="button" data-section="VIP"><b id="legend-section-vip-count">VIP</b></button>
+		              </div>
+		            </div>
+		            <div class="legend-filter-row">
+		              <span class="legend-label">频次</span>
+	              <div class="legend-group">
+	                <button id="legend-high-btn" type="button" data-frequency="高频"><i style="background: var(--hf-bd);"></i><b id="legend-high-count">高频</b></button>
+	                <button id="legend-mid-btn" type="button" data-frequency="次高频"><i style="background: var(--mhf-bd);"></i><b id="legend-mid-count">次高频</b></button>
+	                <button id="legend-low-btn" type="button" data-frequency="非高频"><i style="background: var(--lf-bd);"></i><b id="legend-low-count">非高频</b></button>
+	              </div>
+	            </div>
+		            <div class="legend-filter-row">
+		              <span class="legend-label">Part</span>
+		              <div class="legend-group">
+	                <button id="legend-part-p1-btn" type="button" data-part="P1"><b id="legend-part-p1-count">P1</b></button>
+	                <button id="legend-part-p2-btn" type="button" data-part="P2"><b id="legend-part-p2-count">P2</b></button>
+	                <button id="legend-part-p3-btn" type="button" data-part="P3"><b id="legend-part-p3-count">P3</b></button>
+	                <button id="legend-part-p4-btn" type="button" data-part="P4"><b id="legend-part-p4-count">P4</b></button>
+	              </div>
+	            </div>
+	            <div class="legend-filter-row">
+	              <span class="legend-label">题型</span>
+	              <div class="legend-group">
+	                <button id="legend-type-single-btn" type="button" data-type="single"><b id="legend-single-count">单选</b></button>
+	                <button id="legend-type-multi-btn" type="button" data-type="multi"><b id="legend-multi-count">多选</b></button>
+	                <button id="legend-type-match-btn" type="button" data-type="match"><b id="legend-match-count">匹配</b></button>
+	                <button id="legend-type-map-btn" type="button" data-type="map"><b id="legend-map-count">地图</b></button>
+		                <button id="legend-type-text-btn" type="button" data-type="text"><b id="legend-text-count">填空</b></button>
+		              </div>
+		            </div>
+		            <div class="legend-filter-row">
+		              <span class="legend-label">状态</span>
+		              <div class="legend-group">
+		                <button id="legend-completed-btn" type="button" data-status="completed"><b id="legend-completed-count">已完成</b></button>
+		                <button id="legend-pending-btn" type="button" data-status="pending"><b id="legend-pending-count">待完成</b></button>
+		                <button id="legend-unstarted-btn" type="button" data-status="unstarted"><b id="legend-unstarted-count">未完成</b></button>
+		              </div>
+		            </div>
+	            <div class="legend-filter-row">
+	              <span class="legend-label">展示</span>
+	              <div class="legend-group">
+	                <button type="button" data-view-mode="gallery"><b>Gallery</b></button>
+	                <button type="button" data-view-mode="list"><b>List</b></button>
+	              </div>
+	            </div>
+	          </div>
+
+          <div class="toolbar">
+            <input id="search-input" class="search-input" type="search" placeholder="搜索题目，例如 Holidays / P3 / 46">
+            <button id="clear-records-btn" class="action-btn" type="button">清空全部做题记录</button>
+            <button id="tools-toggle-btn" class="action-btn" type="button" hidden>工具栏</button>
+            <div id="tools-menu" class="tools-menu" hidden></div>
+            <input id="import-wrongbook-file" type="file" accept=".json,application/json" hidden>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-tile is-hidden">
+            <div class="stat-label">Overall Accuracy</div>
+            <div class="overall-wrap">
+              <div id="overall-badge" class="overall-badge">正确率 <strong id="overall-rate">--</strong></div>
+              <div class="overall-tip">
+                <div id="overall-tip-list" class="overall-tip-list"></div>
+              </div>
+            </div>
+          </div>
+          <div class="stat-tile rate-p1">
+            <div class="stat-label">P1 正确率</div>
+            <div class="stat-value" id="part-rate-p1">未开始</div>
+          </div>
+          <div class="stat-tile rate-p2">
+            <div class="stat-label">P2 正确率</div>
+            <div class="stat-value" id="part-rate-p2">未开始</div>
+          </div>
+          <div class="stat-tile rate-p3">
+            <div class="stat-label">P3 正确率</div>
+            <div class="stat-value" id="part-rate-p3">未开始</div>
+          </div>
+          <div class="stat-tile rate-p4">
+            <div class="stat-label">P4 正确率</div>
+            <div class="stat-value" id="part-rate-p4">未开始</div>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" id="normal-section">
+        <div class="section-header">
+          <h2>普通题</h2>
+        </div>
+        <div id="normal-grid" class="grid"></div>
+        <p id="normal-search-empty" class="search-empty" hidden>当前搜索条件下没有匹配到普通题。</p>
+      </section>
+
+      <section class="section" id="vip-section">
+        <div class="section-header">
+          <h2>VIP 题</h2>
+        </div>
+        <div id="vip-grid" class="grid"></div>
+        <p id="vip-search-empty" class="search-empty" hidden>当前搜索条件下没有匹配到 VIP 题。</p>
+      </section>
+      </div>
+
+      <section id="wrongbook-page" class="page-panel wrongbook-view" hidden>
+        <div class="tool-view-head">
+          <div>
+            <div class="page-kicker">Mistakes</div>
+            <h1 class="page-title">错题本</h1>
+          </div>
+          <button id="wrongbook-close" class="action-btn" type="button" hidden>返回题库</button>
+        </div>
+        <div class="filter-toolbar wrongbook-filter-panel">
+          <div class="filter-row">
+            <span class="filter-label">Scope</span>
+            <button class="filter-btn on" type="button" data-wrongbook-filter="scope" data-value="all">全部题</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Type</span>
+            <button class="filter-btn on" type="button" data-wrongbook-filter="type" data-value="all">全部</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="type" data-value="single">单选</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="type" data-value="multi">多选</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="type" data-value="match">匹配</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="type" data-value="map">地图</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="type" data-value="text">填空</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Section</span>
+            <button class="filter-btn on" type="button" data-wrongbook-filter="section" data-value="all">全部</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="section" data-value="普通">普通</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="section" data-value="VIP">VIP</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Part</span>
+            <button class="filter-btn on" type="button" data-wrongbook-filter="part" data-value="all">全部</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="part" data-value="P1">P1</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="part" data-value="P2">P2</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="part" data-value="P3">P3</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="part" data-value="P4">P4</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Frequency</span>
+            <button class="filter-btn on" type="button" data-wrongbook-filter="freq" data-value="all">全部</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="freq" data-value="high"><i style="background: var(--hf-bd);"></i>高频</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="freq" data-value="medium"><i style="background: var(--mhf-bd);"></i>次高频</button>
+            <button class="filter-btn" type="button" data-wrongbook-filter="freq" data-value="low"><i style="background: var(--lf-bd);"></i>非高频</button>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Search</span>
+            <input id="wrongbook-search" class="filter-search" type="search" placeholder="搜索题目、答案、题号，例如 Driving / P3 / 10">
+            <span id="wrongbook-summary" class="filter-summary"></span>
+          </div>
+        </div>
+        <div id="wrongbook-list" class="wrongbook-results-list"></div>
+        <div id="wrongbook-normal" hidden></div>
+        <div id="wrongbook-vip" hidden></div>
+        <aside id="wrongbook-detail" class="wrongbook-detail-pane" hidden></aside>
+      </section>
+
+      <section id="suite-page" class="page-panel tool-page" hidden>
+        <div class="tool-view-head">
+          <div>
+            <div class="page-kicker">Mock Test</div>
+            <h1 class="page-title">套题匹配</h1>
+          </div>
+        </div>
+        <section id="suite-panel" class="suite-panel"></section>
+      </section>
+
+      <section id="help-page" class="page-panel tool-page help-page" hidden>
+        <div class="tool-view-head">
+          <div>
+            <div class="page-kicker">Guide</div>
+            <h1 class="page-title">新手必看（使用前一定看）</h1>
+          </div>
+        </div>
+        <p class="help-lead">iPad 直接用 Safari 打开本站即可练习，无需安装软件，也不需要电脑保持开机。答题记录保存在当前浏览器中，换设备或清除 Safari 网站数据前请先导出记录。</p>
+        <section class="help-quick">
+          <h2 class="help-quick-title">先看这几条，很重要</h2>
+          <ul>
+            <li>推荐在 Safari 中打开，并用“分享 → 添加到主屏幕”保存为桌面图标。</li>
+            <li>题库、题目、音频和 PDF 已内置到网页，不需要选择本地文件夹。</li>
+            <li>同一台 iPad、同一个 Safari 会自动保留进度；无痕浏览不适合长期练习。</li>
+            <li>换 iPad、换浏览器或清空全部记录前，先点左侧“保存答题记录”。</li>
+            <li><span class="help-code">Clear</span> 只清当前这次作答，不会删除历史记录；“清空全部做题记录”才会删除记录。</li>
+            <li>资料仅供练习和参考，不提供也不承诺预测。</li>
+          </ul>
+        </section>
+
+        <details class="help-category">
+          <summary class="help-category-title">VIP 与资料说明</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>VIP版和普通版有什么区别？</summary>
+              <div class="help-answer">
+                <p>VIP 价格为 49 元 / 一次性。主要包含：</p>
+                <ul>
+                  <li>90 篇额外题目，其中包括约 30 篇地图、5 篇装置图、3 篇流程图、5 篇非常规题型。</li>
+                  <li>149 个带练视频，单个视频约 12-22 分钟，适合模仿复盘和系统学习。</li>
+                  <li>永久答疑、经验分享，以及更频繁的高低频更新。</li>
+                  <li>和语料库一起购买可立减 30 元。</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>VIP 授权怎么理解？</summary>
+              <div class="help-answer">
+                <p>未解锁时可以使用普通题。输入有效授权码后，VIP 题库会在授权期内可用；授权码只在规定时间内可用，激活成功后 VIP 固定可用 7 天，到期后需要输入新的授权码。</p>
+                <p>解锁步骤：点击左边侧栏的 <span class="help-code">解锁 VIP</span>，输入 VIP 授权码即可；授权码在群文件里，每周会更新。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>能不能预测？</summary>
+              <div class="help-answer">
+                <p>不能，不能，不能。资料仅供练习和参考，不承诺预测命中，也无法告知更具体的地区或时间。</p>
+                <p>请不要相信或购买任何“预测”。真正稳定的提升，还是来自练习、复盘和能力本身。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>能不能多出一点，或者一次性出完？</summary>
+              <div class="help-answer">
+                <p>暂时不能。题目和音频制作都需要反复测试，数量已经不少，但我一个人的精力有限，还需要维护产品、VIP 内容和其他事情。会继续更新，但无法一次性全部做完。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>纸笔可以用吗？海外可以用吗？</summary>
+              <div class="help-answer">
+                <p>可以。它本质是练习素材，纸笔、机考、海外都可以作为补充练习使用。但不要完全依赖它，剑雅依然是不可替代的基础素材。</p>
+                <p>海外题目也会轮换出现，只是不同地区考题不一定完全一致。心态上当作练习就好。</p>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="help-category">
+          <summary class="help-category-title">iPad 网页版使用</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>iPad 怎么打开？</summary>
+              <div class="help-answer">
+                <ol>
+                  <li>用 Safari 打开网页版链接。</li>
+                  <li>等待首页显示“普通 / 130篇”，然后选择题目开始练习。</li>
+                  <li>需要桌面图标时，点 Safari 的“分享 → 添加到主屏幕”。</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>需要安装软件吗？</summary>
+              <div class="help-answer">
+                <p>不需要。网页版在 Safari 内运行，不使用 Windows 的 <span class="help-code">xiahua.exe</span> 或 Electron 运行时。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>使用时需要电脑开机吗？</summary>
+              <div class="help-answer">
+                <p>不需要。发布完成后，iPad 可以独立访问网站；只要能连接互联网即可。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>需要 VPN 吗？</summary>
+              <div class="help-answer">
+                <p>通常不需要。校园网或手机热点能正常访问网页链接时即可使用。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>网页打不开或音频不播放怎么办？</summary>
+              <div class="help-answer">
+                <p>先刷新页面，并确认 Safari 能正常访问 GitHub Pages。音频需要点播放按钮后才会开始；若校园网限制访问，可临时切换手机热点。</p>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="help-category">
+          <summary class="help-category-title">题库与答题记录</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>题库怎么更新？</summary>
+              <div class="help-answer">
+                <p>网页版题库由网站统一更新。重新打开或刷新网页即可获取已发布的版本，不需要在 iPad 上解压或移动文件。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>为什么首页没有显示 130 篇？</summary>
+              <div class="help-answer">
+                <p>先清空搜索框和筛选条件；筛选数字会随当前条件变化。如果仍显示 0 篇，请刷新页面或切换一次网络。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>题目或音频加载失败怎么办？</summary>
+              <div class="help-answer">
+                <p>刷新当前页面后重试。校园网偶尔会限制或缓存 GitHub Pages 资源，此时可以切换手机热点；正常使用不要求 VPN。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>答题记录保存在哪里？</summary>
+              <div class="help-answer">
+                <p>答题记录保存在当前 Safari 的网站数据中。清除 Safari 历史记录与网站数据可能会删除它，请定期使用左侧“保存答题记录”导出 JSON 备份。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>换电脑或更新版本前要做什么？</summary>
+              <div class="help-answer">
+                <p>建议先点击左侧“保存答题记录”导出 JSON。新版本或新电脑里点击“导入答题记录”即可恢复。</p>
+                <p class="help-note">导出/导入用于迁移做题记录、错题记录、套题记录、笔记和高亮等答题数据。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>Clear、Finish、套题记录有什么区别？</summary>
+              <div class="help-answer">
+                <ul>
+                  <li>Finish / Next 会保存当前答题内容；做到一半退出后，待完成记录会尽量保留，重新进入可继续。</li>
+                  <li>Clear 只清空当前页面的作答痕迹，不会删除已经进入错题本和历史里的记录。</li>
+                  <li>清空全部做题记录会删除正确率、错题本、套题记录和待完成草稿；操作前建议先导出备份。</li>
+                  <li>单篇题目可以自由调整倍速；套题做题时会更接近考场状态，音频控制会受到限制，回看时可以操作。</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </details>
+
+
+        <details class="help-category">
+          <summary class="help-category-title">功能说明与注意事项</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>首页题库列表可以做什么？</summary>
+              <div class="help-answer">
+                <p>首页会展示普通题和 VIP 题，并按 Part、频次、题型和完成状态筛选。也可以用搜索框按题号、标题或关键词查找题目。</p>
+                <p class="help-note">如果刚更新网站后没有显示，请刷新页面；仍未更新时可关闭标签页后重新打开。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>未做、待完成、已完成分别是什么意思？</summary>
+              <div class="help-answer">
+                <ul>
+                  <li>未做：没有正式提交记录，也没有保存中的草稿。</li>
+                  <li>待完成：已经开始作答但还没有 Finish，首页会优先显示当前草稿进度。</li>
+                  <li>已完成：已经 Finish 过，首页显示最近一次正式成绩；如果又开始了一次新草稿，会同时提示待完成进度和上次成绩。</li>
+                </ul>
+                <p class="help-note">直接退出不会等于重新提交；只有 Finish / 套题最后提交才会生成正式成绩。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>单篇练习有哪些功能？</summary>
+              <div class="help-answer">
+                <ul>
+                  <li>可以做题、提交、查看结果和回看解析。</li>
+                  <li>可以使用原文和精听、听写模式、笔记和高亮。</li>
+                  <li>单篇音频可以自行调整倍速。</li>
+                  <li>从首页点开题目时，会比较单篇草稿和最近一次正式记录的时间：较新的草稿会继续作答，否则回看最近一次记录。</li>
+                  <li>最近记录可能来自单篇，也可能来自套题；如需从空白开始，在回看页面点击 Clear 即可，原历史不会删除。</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>套题匹配是做什么的？</summary>
+              <div class="help-answer">
+                <p>套题匹配会随机组成 P1-P4 一整套题，并按雅思听力 40 题的分数表估分。频率选项表示优先偏好；首选频率没有新题时，会从另外两种频率的新题中随机。</p>
+                <p>VIP 解锁后可以选择全部题库、仅普通或仅 VIP。所选范围内全部新题用完后，才会按错题情况兜底抽取历史题。</p>
+                <p>每次随机前会快速核对完整题库索引；题库没变化时直接使用完整缓存，检测到新增、移动或删除时才更新候选池。</p>
+                <p>已经出现在套题历史里的 Part 会优先避开，包括未完成套题；只要范围内还有新题，就不会回抽已练题或错题。</p>
+                <p class="help-note">套题做题时更接近考场状态，音频控制会受到限制；回看时可以操作音频，“查看解析”会定位到对应题目的解析和最新音频时间点。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>套题里的 Next、Previous、Finish 怎么用？</summary>
+              <div class="help-answer">
+                <ul>
+                  <li>Next：进入下一 Part，并保存当前 Part 的作答。</li>
+                  <li>Previous：回到上一 Part，继续查看或修改。</li>
+                  <li>Finish：最后一 Part 完成后提交整套，并生成整套结果。</li>
+                  <li>做到一半退出时，待完成草稿会尽量保留，下次可以继续。</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>错题本会记录什么？</summary>
+              <div class="help-answer">
+                <p>错题本会记录单篇和套题中做错的题，并保留最近几次对应记录。点“回看这次”会打开对应那一次的界面，不是最新一次。</p>
+                <p>如果从错题本选择“重做这篇”，会重新空白开始；如果只是回看，不会新增记录。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>原文和精听怎么用？</summary>
+              <div class="help-answer">
+                <p>单篇练习里可以打开原文和精听，进行逐句播放、循环、慢速、显示中文、显示解析和听写模式。</p>
+                <p>套题做题过程中通常不能打开原文和精听，避免影响模拟考试状态；套题回看时可以查看。</p>
+                <p class="help-note">原文主要来自 AI 识别和人工整理，可能有少量小错误，以题目 PDF 和实际音频为准。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>高亮和笔记有什么注意事项？</summary>
+              <div class="help-answer">
+                <p>高亮和笔记会随答题记录保存，用于复盘和回看。建议高亮关键词或短语，不要大范围跨行选中，以免影响页面排版。</p>
+                <p>如果想重新做题，可以使用 Clear 清空当前作答痕迹；这不会删除已经保存的历史记录。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>为什么重新进入题目还会看到答案或高亮？</summary>
+              <div class="help-answer">
+                <p>这是为了保留上一次作答现场，方便继续做题或复盘。单篇、套题回看和错题本都会尽量恢复当时的答案、高亮和笔记。</p>
+                <p>如果想从空白重新开始，请点击当前题目里的 <span class="help-code">Clear</span>。Clear 不会删除错题本或历史记录。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>套题做到一半、切换 Part 或回看时需要注意什么？</summary>
+              <div class="help-answer">
+                <p>套题切换 Next / Previous 时会保存当前 Part 的作答和高亮；回看历史记录时，会打开对应那一次，不会自动变成最新一次。</p>
+                <p>套题中提交的每个 Part 也会形成对应单篇的正式记录；首页会在单篇和套题记录中按时间显示最近一次，旧记录仍会保留。</p>
+                <p class="help-note">套题做题时原文精听通常不可打开，音频也会更接近考场状态；回看时可以查看原文精听，“查看解析”会同步跳到对应字幕和音频位置。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>保存答题记录、导入答题记录、清空全部记录分别是什么？</summary>
+              <div class="help-answer">
+                <ul>
+                  <li>保存答题记录：导出当前本机数据，适合更新版本或换电脑前备份。</li>
+                  <li>导入答题记录：把之前导出的记录恢复到当前软件。</li>
+                  <li>清空全部做题记录：删除正确率、错题本、套题历史和待完成草稿。</li>
+                </ul>
+                <p class="help-note">清空全部记录前建议先导出备份；Clear 和“清空全部做题记录”不是同一个功能。</p>
+              </div>
+            </details>
+          </div>
+        </details>
+
+
+
+        <details class="help-category">
+          <summary class="help-category-title">刷题建议</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>如何刷最高效？有优先级吗？</summary>
+              <div class="help-answer">
+                <p>先找到自己的薄弱 Part，对应练习。硬要排序的话，可以从高频和最新题开始刷，但不代表非高频一定不考。</p>
+                <p>最重要的不是刷了多少题，而是能不能复盘、总结错误，并避免重复犯同一个错误。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>只刷高频可以吗？</summary>
+              <div class="help-answer">
+                <p>不太建议。如果只是抱着刷到原题的心态来用，这份资料可能不适合你。它更适合用来提升听力能力、熟悉考场难度，而不是依赖所谓押中。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>难度怎么样？和剑雅差距大吗？</summary>
+              <div class="help-answer">
+                <p>难度是随机的，和真实考试一样会有波动。有些题简单，有些题会比较难，分数上下浮动 0.5-1 分都很正常。</p>
+                <p>做题结果不等于最终考试分数，更应该关注自己有没有听力能力上的提升。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>只刷你的题，不刷剑雅可以吗？</summary>
+              <div class="help-answer">
+                <p>不推荐。剑雅是不可替代的基础素材。只有当剑雅已经刷完、甚至答案都记住了，再用这些题作为补充会更合适。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>需要倍速听吗？</summary>
+              <div class="help-answer">
+                <p>不需要。音频是考场原速，我也不推荐平时一上来就倍速。原速有原速的节奏、气口和信息推进方式。</p>
+                <p>复盘、精听或已经很熟悉之后，可以适当倍速回顾结构，但正常做题建议原速。</p>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="help-category">
+          <summary class="help-category-title">答案、原文与题目问题</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>答案、原文、解析在哪里？</summary>
+              <div class="help-answer">
+                <p>答案一般在 PDF 最后一页，HTML 会自动批改。答案不一定唯一，一切以 PDF 为准。</p>
+                <p>原文在 HTML 右下角点击 Transcript 查看；如果有单独的 transcript 文件，可以用文本编辑器打开。</p>
+                <p>普通版基本无完整解析，主要看原文校对；VIP 群里有带练视频和讲解。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>答案或题目有问题怎么办？</summary>
+              <div class="help-answer">
+                <p>答案偶尔可能有争议，有问题我一般会在小红书说明。题目问题大多来自代码生成或 AI 识别 bug，也会尽量更新说明。</p>
+                <p>部分机经题本身可能存在不合理或牵强之处，适合作为练习，但不建议过度纠结。</p>
+              </div>
+            </details>
+          </div>
+        </details>
+
+        <details class="help-category">
+          <summary class="help-category-title">联系与入群问题</summary>
+          <div class="help-faq">
+            <details class="help-item">
+              <summary>如何找到你？</summary>
+              <div class="help-answer">
+                <p>名字一直是：Listening永不虾滑。可以多搜索一下。群介绍里会放最新群号。设置入群问题主要是为了避开机构、引流和倒卖。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>能不能快一点通过？大概多久？</summary>
+              <div class="help-answer">
+                <p>一般 24 小时内会处理，但没有固定时间。我没办法一直盯着消息，也不会因为私信催促就更快通过，通常会按申请顺序处理。</p>
+              </div>
+            </details>
+
+            <details class="help-item">
+              <summary>为什么申请好几次还是没通过？</summary>
+              <div class="help-answer">
+                <p>常见原因有：</p>
+                <ul>
+                  <li>账号等级太低、无内容，可能被判断为风险账号。</li>
+                  <li>入群问题填写错误，需要的是号码，不是名字。</li>
+                  <li>IP 出现风险提示，系统不允许添加。</li>
+                  <li>申请被系统吞掉，海外或反复申请时可能发生。</li>
+                  <li>加的是已满群，满 500 人的群无法再进新人。避开 500 的整数倍群号。</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </details>
+      </section>
+    </main>
+  </div>
+
+  <div id="wrongbook-modal" class="modal" hidden></div>
+
+  <div id="detail-modal" class="modal" hidden>
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h3 id="detail-title"></h3>
+          <div id="detail-meta" class="modal-meta"></div>
+        </div>
+        <button id="detail-close" class="action-btn" type="button">关闭</button>
+      </div>
+      <div id="detail-body"></div>
+    </div>
+  </div>
+
+  <div id="intro-modal" class="modal" hidden>
+    <div class="modal-panel intro-panel">
+      <div class="intro-section">
+        <div class="intro-kicker">Update</div>
+        <h3 class="intro-section-title">本次更新</h3>
+        <ul class="intro-list">
+          <li>题库频次已按 9 月 1 日表格更新：普通版与 VIP 版共 220 篇，首页篇数会根据当前筛选动态显示。</li>
+          <li>统一单篇与套题提交、回看界面：保留作答内容，并显示答案区域和简洁的红绿批改反馈；单纯回看不会新增做题记录。</li>
+          <li>修复 Clear 后部分填空题无法继续输入、音频意外变速的问题；Clear 后主音频恢复 1.0x，历史与错题记录仍会保留。</li>
+          <li>加强套题完整候选池校验、重复规避和题目读取回退，减少重复抽题及偶发的套题读取失败。</li>
+        </ul>
+      </div>
+
+      <div class="intro-section">
+        <h4 class="intro-section-title">新手必看很重要</h4>
+        <ul class="intro-list">
+          <li>第一次使用、换 iPad、清除 Safari 数据或导入导出记录前，请先点这里看一遍。</li>
+          <li>如果出现 0 篇、扫不出来、记录不见、状态不对，大多可以在新手必看里找到原因。</li>
+          <li>更新版本或换电脑前，建议先保存答题记录；本资料仅供练习和参考，不提供预测。</li>
+        </ul>
+        <button id="intro-help-btn" class="action-btn primary intro-help-action" type="button">查看新手必看</button>
+      </div>
+
+      <div class="intro-section">
+        <h4 class="intro-section-title">虾滑机经/课程/语料库</h4>
+        <p class="intro-mini">企鹅搜索“虾滑”或“Listening永不虾滑”，52 群马上开放；请以群介绍中的最新群号为准，并仔细查看空间甄别骗子。</p>
+        <ul class="intro-list">
+          <li>虾滑课程：适合需要系统诊断/复盘方法/督学和答疑的同学。</li>
+          <li>VIP：包含额外题目/带练视频/答疑和更频繁的高低频更新。</li>
+          <li>语料库：适合搭配听力刷题使用，和 VIP 一起购买可立减 30。</li>
+        </ul>
+        <div class="intro-links">
+          <a class="intro-link" href="https://xhslink.com/m/7y4vmscmFuE" target="_blank" rel="noopener noreferrer">小红书</a>
+          <a class="intro-link" href="https://v.douyin.com/uoV0UptOc9w/" target="_blank" rel="noopener noreferrer">抖音</a>
+          <a class="intro-link" href="https://docs.qq.com/doc/DYUxSYXZDbHRzWW9k" target="_blank" rel="noopener noreferrer">课程介绍</a>
+          <a class="intro-link" href="https://docs.qq.com/doc/DYUN1bnVqc3JTUHhE" target="_blank" rel="noopener noreferrer">语料库/VIP</a>
+        </div>
+      </div>
+
+      <div class="intro-actions">
+        <button id="intro-close" class="action-btn primary intro-start" type="button">开始练习</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="modal" hidden>
+    <div class="modal-panel settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <div class="modal-head"><div><h3 id="settings-title" class="settings-section-title">回看与解析</h3><p class="settings-description">设置同时作用于单篇和套题，并保存在当前电脑。</p></div><button id="settings-close" class="action-btn" type="button">关闭</button></div>
+      <div class="settings-list">
+        <div class="settings-row"><div class="settings-row-copy"><strong>点击解析后</strong><span>是否立即播放对应录音</span></div><div class="settings-options"><label class="settings-option"><input type="radio" name="analysis-playback" value="seek"><span>仅定位</span></label><label class="settings-option"><input type="radio" name="analysis-playback" value="play"><span>定位并自动播放</span></label></div></div>
+        <div class="settings-row"><div class="settings-row-copy"><strong>解析跳转位置</strong><span>选择定位到答案证据或完整解析</span></div><div class="settings-options"><label class="settings-option"><input type="radio" name="analysis-target" value="evidence"><span>正确答案证据句</span></label><label class="settings-option"><input type="radio" name="analysis-target" value="analysis"><span>完整解析段开头</span></label></div></div>
+        <div class="settings-row"><div class="settings-row-copy"><strong>查看正确答案</strong><span>控制回看表格中的初始显示状态</span></div><div class="settings-options"><label class="settings-option"><input type="radio" name="answer-visibility" value="hidden"><span>默认隐藏</span></label><label class="settings-option"><input type="radio" name="answer-visibility" value="shown"><span>默认显示</span></label></div></div>
+      </div>
+      <div class="settings-actions"><button id="settings-done" class="action-btn primary" type="button">完成</button></div>
+    </div>
+  </div>
+
+  <script src="./JS/library-manifest.js?v=20260909a"></script>
+  <script src="./JS/web-library.js?v=20260909a"></script>
+  <script src="./JS/library-cache.js?v=20260509d"></script>
+  <script src="./JS/practice-tracker.js?v=20260524e"></script>
+  <script src="./JS/auth-client.js?v=20260518b"></script>
+  <script src="./JS/suite-practice.js?v=20260824f"></script>
+  <script src="./JS/index-app.js?v=20260825j"></script>
+</body>
+</html>

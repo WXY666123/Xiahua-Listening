@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>题目加载中</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #f6f7fb;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .shell {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .topbar-main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .title {
+      font-size: 14px;
+      color: #374151;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status {
+      font-size: 12px;
+      color: #6b7280;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status.ok {
+      color: #166534;
+    }
+
+    .status.warn {
+      color: #b45309;
+    }
+
+    .status.error {
+      color: #b91c1c;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 88px;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #1f2937;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .player-btn {
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      color: #1f2937;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .player-btn.primary {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+
+    .player-btn.active {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+
+    .player-btn:disabled {
+      background: #f3f4f6;
+      border-color: rgba(0, 0, 0, 0.08);
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .error {
+      display: none;
+      padding: 24px;
+      color: #991b1b;
+      font-size: 14px;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .topbar,
+      .topbar {
+        padding: 8px 10px;
+      }
+
+      .back-link,
+      .player-btn {
+        min-width: 0;
+        height: 34px;
+        padding: 0 10px;
+        border-radius: 9px;
+        font-size: 13px;
+      }
+
+    }
+
+  </style>
+  <script src="./web-library.js?v=20260909a"></script>
+  <script src="./library-cache.js?v=20260804a"></script>
+  <script src="./practice-tracker.js?v=20260804a"></script>
+  <script src="./auth-client.js?v=20260804a"></script>
+  <script src="./suite-practice.js?v=20260824f"></script>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="topbar-main">
+        <div id="title" class="title">题目加载中...</div>
+        <div id="status" class="status">等待题目加载...</div>
+      </div>
+      <a class="back-link" href="../index.html">返回题库</a>
+    </div>
+    <iframe id="player-frame" title="题目播放器"></iframe>
+  </div>
+  <div id="error" class="error"></div>
+  <script src="./player-app.js?v=20260826j"></script>
+</body>
+</html>
