@@ -5534,6 +5534,10 @@
       intensive: { activeIndex: 0, loop: false, slow: false, showCn: true, showAnalysis: true }
     };
     state.audio.preload = "auto";
+    state.audio.setAttribute("playsinline", "");
+    state.audio.setAttribute("webkit-playsinline", "");
+    state.audio.muted = false;
+    state.audio.volume = 1;
 
     const setSuiteStatus = (message, level = "") => {
       refs.status.textContent = message;
@@ -5588,24 +5592,40 @@
       report: (message, level) => setSuiteStatus(message, level)
     });
 
+    const requestAudioPlayback = () => {
+      state.audio.muted = false;
+      state.audio.volume = 1;
+      const promise = state.audio.play?.();
+      promise?.catch?.((error) => {
+        console.error("Suite audio playback failed:", error);
+        refs.play.textContent = "▶";
+        setSuiteStatus("Safari 未能开始播放，请再点一次播放按钮并检查 iPad 音量。", "warn");
+      });
+    };
+
     const loadAudioPart = (index, options = {}) => {
       const safe = Math.max(0, Math.min(index, state.parts.length - 1));
       const src = getAudioUrl(safe);
       if (!src) return;
       state.audioPart = safe;
       if (state.audio.src !== src) {
+        state.audio.pause();
         state.audio.src = src;
         state.audio.currentTime = 0;
+        refs.fillbar.style.width = "0%";
+        refs.time.textContent = "0:00 / 00:00";
         state.audio.load?.();
       }
       state.audio.playbackRate = 1;
       if (!options.suppressPlay && (options.play || state.audioStarted)) {
-        state.audio.play().catch(() => {});
+        requestAudioPlayback();
       }
     };
 
     const ensureAudioReady = () => {
-      if (!state.audio.src) loadAudioPart(state.audioPart || 0);
+      if (!state.audio.src || state.audioPart !== state.index) {
+        loadAudioPart(state.index, { suppressPlay: true });
+      }
     };
 
     const loadAudioDuration = (index) => new Promise((resolve) => {
@@ -5653,7 +5673,7 @@
     state.audio.addEventListener("loadedmetadata", updateAudioTime);
     state.audio.addEventListener("ended", () => {
       if (state.audioPart < state.parts.length - 1) {
-        loadAudioPart(state.audioPart + 1, { play: true });
+        goToPart(state.audioPart + 1);
       } else if (!state.suite.completedAt && !explicitSuiteReview && !state.autoFinishPending) {
         state.checking = true;
         state.checkRemainingSeconds = SUITE_REVIEW_GRACE_SECONDS;
@@ -5664,8 +5684,7 @@
     });
     refs.play.addEventListener("click", () => {
       ensureAudioReady();
-      const reviewingAudio = !!(state.suite?.completedAt || explicitSuiteReview);
-      if (state.audio.paused) state.audio.play().catch(() => {});
+      if (state.audio.paused) requestAudioPlayback();
       else state.audio.pause();
     });
 
@@ -6526,6 +6545,7 @@
 
     const goToPart = (nextIndex, options = {}) => {
       collectInputs();
+      const resumeAudio = state.audioStarted && !state.audio.paused;
       const leavingFinalPart = state.index >= state.parts.length - 1;
       if (!state.suite.completedAt && !explicitSuiteReview && options.save !== false && !leavingFinalPart) {
         saveCurrentPart();
@@ -6536,6 +6556,7 @@
       decodedSrc = suiteItem.path;
       if (!state.suite.completedAt && !explicitSuiteReview) window.SuitePractice?.setCurrentIndex?.(suiteId, state.index);
       renderPart();
+      loadAudioPart(state.index, { play: resumeAudio, suppressPlay: !resumeAudio });
     };
 
     const finishSuite = (force = false) => {
@@ -6638,6 +6659,9 @@
             updateAudioTime();
           }, { once: true });
           state.audio.load?.();
+        } else {
+          state.audioPart = state.index;
+          loadAudioPart(state.index, { suppressPlay: true });
         }
         setSuiteStatus("题目读取完成。", "ok");
         renderPart();
