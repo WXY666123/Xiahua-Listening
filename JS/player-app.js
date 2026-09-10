@@ -6634,10 +6634,6 @@
     Promise.all(suite.items.map((item) => loadSuitePartData(item)))
       .then((parts) => {
         state.parts = parts;
-        return Promise.all(parts.map((_, index) => loadAudioDuration(index)));
-      })
-      .then((durations) => {
-        state.audioDurations = durations;
         const savedAudio = state.draft.audio;
         const savedCheck = state.draft.check;
         if (savedCheck?.active && Number(savedCheck.remainingSeconds) > 0 && !state.suite.completedAt && !explicitSuiteReview) {
@@ -6665,6 +6661,11 @@
         }
         setSuiteStatus("题目读取完成。", "ok");
         renderPart();
+        updateTimer();
+        return Promise.all(parts.map((_, index) => loadAudioDuration(index)));
+      })
+      .then((durations) => {
+        state.audioDurations = durations;
         updateTimer();
       })
       .catch((error) => {
