@@ -5595,8 +5595,11 @@
     const requestAudioPlayback = () => {
       state.audio.muted = false;
       state.audio.volume = 1;
+      const requestedSrc = state.audio.src;
+      const requestedPart = state.audioPart;
       const promise = state.audio.play?.();
       promise?.catch?.((error) => {
+        if (state.audio.src !== requestedSrc || state.audioPart !== requestedPart) return;
         console.error("Suite audio playback failed:", error);
         refs.play.textContent = "▶";
         setSuiteStatus("Safari 未能开始播放，请再点一次播放按钮并检查 iPad 音量。", "warn");
@@ -5666,6 +5669,7 @@
     state.audio.addEventListener("play", () => {
       state.audioStarted = true;
       refs.play.textContent = "⏸";
+      setSuiteStatus(`正在播放 ${state.suite.items[state.audioPart]?.part || "当前题目"} 对应音频。`, "ok");
       persist();
     });
     state.audio.addEventListener("pause", () => {
