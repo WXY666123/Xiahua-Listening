@@ -1169,8 +1169,12 @@
   }
 
   function applyQuestionLinkAttributes(link) {
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
+    if (window.NativeDiskStorage?.isWebLibrary) {
+      link.target = "_self";
+    } else {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
     return link;
   }
 
@@ -1210,6 +1214,7 @@
 
   function attachQuestionOpenWarmup(link, relativePath) {
     if (!link || !relativePath) return link;
+    if (window.NativeDiskStorage?.isWebLibrary) return link;
     link.addEventListener("click", async (event) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
         return;

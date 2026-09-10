@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>题目加载中</title>
+  <script>
+    if (window.location.protocol === "file:") {
+      const onlinePlayer = new URL("https://wxy666123.github.io/Xiahua-Listening/JS/player.html");
+      onlinePlayer.search = window.location.search;
+      onlinePlayer.hash = window.location.hash;
+      window.location.replace(onlinePlayer.href);
+    }
+  </script>
   <style>
     html, body {
       margin: 0;
