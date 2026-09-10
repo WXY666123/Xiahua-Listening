@@ -5607,13 +5607,17 @@
       const safe = Math.max(0, Math.min(index, state.parts.length - 1));
       const src = getAudioUrl(safe);
       if (!src) return;
+      const durationKey = String(state.parts[safe]?.path || "").replace(/\\/g, "/");
+      const knownDuration = Number(window.XIAHUA_AUDIO_DURATIONS?.[durationKey] || 0);
+      if (knownDuration > 0) state.audioDurations[safe] = knownDuration;
       state.audioPart = safe;
       if (state.audio.src !== src) {
         state.audio.pause();
+        refs.play.textContent = "▶";
         state.audio.src = src;
         state.audio.currentTime = 0;
         refs.fillbar.style.width = "0%";
-        refs.time.textContent = "0:00 / 00:00";
+        refs.time.textContent = `0:00 / ${knownDuration > 0 ? formatTime(knownDuration) : "00:00"}`;
         state.audio.load?.();
       }
       state.audio.playbackRate = 1;
@@ -6556,7 +6560,6 @@
 
     const goToPart = (nextIndex, options = {}) => {
       collectInputs();
-      const resumeAudio = state.audioStarted && !state.audio.paused;
       const leavingFinalPart = state.index >= state.parts.length - 1;
       if (!state.suite.completedAt && !explicitSuiteReview && options.save !== false && !leavingFinalPart) {
         saveCurrentPart();
@@ -6567,7 +6570,8 @@
       decodedSrc = suiteItem.path;
       if (!state.suite.completedAt && !explicitSuiteReview) window.SuitePractice?.setCurrentIndex?.(suiteId, state.index);
       renderPart();
-      loadAudioPart(state.index, { play: resumeAudio, suppressPlay: !resumeAudio });
+      loadAudioPart(state.index, { suppressPlay: true });
+      setSuiteStatus(`已切换到 ${suiteItem.part} 对应音频，请点击播放。`, "ok");
     };
 
     const finishSuite = (force = false) => {
