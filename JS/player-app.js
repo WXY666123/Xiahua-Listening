@@ -5628,7 +5628,11 @@
       }
     };
 
-    const loadAudioDuration = (index) => new Promise((resolve) => {
+    const loadAudioDuration = (index) => {
+      const durationKey = String(state.parts[index]?.path || "").replace(/\\/g, "/");
+      const knownDuration = Number(window.XIAHUA_AUDIO_DURATIONS?.[durationKey] || 0);
+      if (knownDuration > 0) return Promise.resolve(knownDuration);
+      return new Promise((resolve) => {
       const probe = new Audio();
       probe.preload = "metadata";
       const finish = (value) => {
@@ -5639,7 +5643,8 @@
       probe.addEventListener("error", () => finish(0), { once: true });
       probe.src = getAudioUrl(index);
       probe.load?.();
-    });
+      });
+    };
 
     const getAudioRemainingSeconds = () => {
       if (!state.audioStarted) return null;
@@ -5670,7 +5675,13 @@
         persist();
       }
     });
-    state.audio.addEventListener("loadedmetadata", updateAudioTime);
+    state.audio.addEventListener("loadedmetadata", () => {
+      if (Number(state.audio.duration || 0) > 0) {
+        state.audioDurations[state.audioPart] = Number(state.audio.duration);
+      }
+      updateAudioTime();
+      updateTimer();
+    });
     state.audio.addEventListener("ended", () => {
       if (state.audioPart < state.parts.length - 1) {
         goToPart(state.audioPart + 1);
