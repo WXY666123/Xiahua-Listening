@@ -55,6 +55,7 @@
   }
 
   window.NativeDiskStorage = {
+    isWebLibrary: true,
     getLibraryRootPath() {
       return "网页版内置题库";
     },

@@ -332,7 +332,20 @@
     const nativeDiskStorage = getNativeDiskStorage();
     if (nativeDiskStorage?.readQuestionHtml) {
       try {
-        return String(nativeDiskStorage.readQuestionHtml(path) || '');
+        const nativeHtml = String(nativeDiskStorage.readQuestionHtml(path) || '');
+        if (nativeHtml) return nativeHtml;
+
+        // The hosted library exposes question files over HTTP rather than a
+        // synchronous desktop filesystem bridge. Fetch the same resolved URL
+        // so suite validation and preloading can use the shared cache API.
+        if (nativeDiskStorage.isWebLibrary && nativeDiskStorage.resolveQuestionUrl) {
+          const response = await fetch(nativeDiskStorage.resolveQuestionUrl(path));
+          if (!response.ok && response.status !== 0) {
+            throw new Error(`Unexpected response: ${response.status}`);
+          }
+          return await response.text();
+        }
+        return '';
       } catch (error) {
         console.error('Failed to read question HTML from disk library:', error);
         return '';

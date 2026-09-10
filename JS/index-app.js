@@ -2841,19 +2841,28 @@
       return;
     }
     renderSuitePanel(suite);
-    window.open(suitePractice.getSuiteUrl(suite.id, 0), "_blank", "noopener,noreferrer");
+    openSuitePlayer(suitePractice.getSuiteUrl(suite.id, 0));
+  }
+
+  function openSuitePlayer(url) {
+    if (!url) return;
+    if (window.NativeDiskStorage?.isWebLibrary) {
+      window.location.href = url;
+      return;
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
   }
 
   function continueSuitePractice(suite) {
     if (!suitePractice || !suite?.id) return;
     const index = suitePractice.getResumeIndex?.(suite) || 0;
-    window.open(suitePractice.getSuiteUrl(suite.id, index), "_blank", "noopener,noreferrer");
+    openSuitePlayer(suitePractice.getSuiteUrl(suite.id, index));
   }
 
   function reviewSuitePractice(suite, index = 0) {
     if (!suitePractice || !suite?.id) return;
     const safeIndex = Math.max(0, Math.min(Number(index || 0), (suite.items || []).length - 1));
-    window.open(suitePractice.getSuiteUrl(suite.id, safeIndex, { review: true }), "_blank", "noopener,noreferrer");
+    openSuitePlayer(suitePractice.getSuiteUrl(suite.id, safeIndex, { review: true }));
   }
 
 	  async function redoSuitePractice(suite) {
@@ -2869,7 +2878,7 @@
       return;
     }
     renderSuitePanel(nextSuite);
-	    window.open(suitePractice.getSuiteUrl(nextSuite.id, 0), "_blank", "noopener,noreferrer");
+	    openSuitePlayer(suitePractice.getSuiteUrl(nextSuite.id, 0));
 	  }
 
 	  function deleteSuiteRecord(suite) {
