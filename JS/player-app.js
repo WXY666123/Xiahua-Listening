@@ -982,6 +982,103 @@
     });
   }
 
+  function installMatchingTapSupport(win) {
+    const doc = win?.document;
+    if (!doc?.body) return;
+    doc.querySelectorAll(".drag,.tag,.slot").forEach((element) => {
+      element.setAttribute("role", "button");
+      element.tabIndex = 0;
+      if (element.matches(".drag,.tag") && !element.hasAttribute("aria-pressed")) {
+        element.setAttribute("aria-pressed", "false");
+      }
+    });
+    if (doc.__xiahuaMatchingTapSupportInstalled) return;
+    doc.__xiahuaMatchingTapSupportInstalled = true;
+
+    const style = doc.createElement("style");
+    style.className = "xiahua-matching-tap-style";
+    style.textContent = [
+      ".drag.xiahua-match-selected,.tag.xiahua-match-selected{outline:3px solid #2563eb;outline-offset:2px;box-shadow:0 0 0 4px rgba(37,99,235,.14)}",
+      ".drag,.tag,.slot{touch-action:manipulation}",
+      ".drag:focus-visible,.tag:focus-visible,.slot:focus-visible{outline:3px solid #2563eb;outline-offset:2px}"
+    ].join("");
+    doc.head?.appendChild(style);
+
+    let selected = null;
+    const groupOf = (element) => element?.closest?.(".group, .matching-group") || null;
+    const isLocked = () => isReadOnlyReview() || isReviewMode(win);
+    const clearSelection = () => {
+      doc.querySelectorAll(".xiahua-match-selected").forEach((element) => {
+        element.classList.remove("xiahua-match-selected");
+        element.setAttribute("aria-pressed", "false");
+      });
+      selected = null;
+    };
+    const selectItem = (element, fromSlot = null) => {
+      const value = String(element?.dataset?.value || "").trim();
+      if (!value) return;
+      const sameItem = selected?.element === element;
+      if (sameItem && fromSlot) {
+        fromSlot.innerHTML = "";
+        delete fromSlot.dataset.value;
+        clearSelection();
+        win.refreshPool?.();
+        win.updateNav?.();
+        win.save?.(false);
+        return;
+      }
+      clearSelection();
+      selected = {
+        value,
+        text: String(element.textContent || value).replace(/\s+/g, " ").trim(),
+        group: groupOf(element),
+        fromSlot,
+        element
+      };
+      element.classList.add("xiahua-match-selected");
+      element.setAttribute("aria-pressed", "true");
+    };
+    const placeSelection = (slot) => {
+      if (!selected || !slot || groupOf(slot) !== selected.group) return;
+      if (selected.fromSlot && selected.fromSlot !== slot) {
+        selected.fromSlot.innerHTML = "";
+        delete selected.fromSlot.dataset.value;
+      }
+      slot.innerHTML = "";
+      const tag = doc.createElement("span");
+      tag.className = "tag";
+      tag.dataset.value = selected.value;
+      tag.setAttribute("draggable", "true");
+      tag.setAttribute("role", "button");
+      tag.tabIndex = 0;
+      tag.textContent = selected.text;
+      slot.appendChild(tag);
+      slot.dataset.value = selected.value;
+      clearSelection();
+      win.refreshPool?.();
+      win.updateNav?.();
+      win.save?.(false);
+    };
+
+    doc.addEventListener("click", (event) => {
+      if (isLocked()) return;
+      const item = event.target?.closest?.(".drag,.tag");
+      if (item) {
+        const selection = win.getSelection?.();
+        if (selection && !selection.isCollapsed) return;
+        selectItem(item, item.closest(".slot"));
+        return;
+      }
+      const slot = event.target?.closest?.(".slot");
+      if (slot) placeSelection(slot);
+    }, true);
+    doc.addEventListener("keydown", (event) => {
+      if (!['Enter', ' '].includes(event.key) || !event.target?.closest?.(".drag,.tag,.slot")) return;
+      event.preventDefault();
+      event.target.click();
+    }, true);
+  }
+
   function collectMatchingSlotSnapshots(win) {
     const doc = win?.document;
     if (!doc) return [];
@@ -4557,6 +4654,7 @@
     resetPlaybackRate(win);
     installUnifiedSuiteAudioSync(win);
     installFrameAudioRetry(win);
+    installMatchingTapSupport(win);
     installSuiteAttemptRestrictions(win);
     frameState.suppressAutoPersist = false;
     const savedState = getSavedPlayerState();
@@ -4585,6 +4683,7 @@
         resetPlaybackRate(win);
         installUnifiedSuiteAudioSync(win);
         installFrameAudioRetry(win);
+        installMatchingTapSupport(win);
         installSuiteAttemptRestrictions(win);
         refreshMatchingSlotLabels(win);
         syncNativeQuestionAnalysisShortcuts(win);
