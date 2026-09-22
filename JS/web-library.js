@@ -74,7 +74,7 @@
     },
     resolveQuestionUrl,
     backToLibrary() {
-      window.location.href = new URL("index.html", siteRootUrl).href;
+      window.location.assign(siteRootUrl.href);
     },
     flush() {},
     readAnswerRecordBackups() {

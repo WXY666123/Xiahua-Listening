@@ -645,7 +645,7 @@
     return [];
   }
 
-  const PLAYER_VERSION = "20260914a";
+  const PLAYER_VERSION = "20260923b";
 
   function buildQuestionHref(relativePath) {
     return buildQuestionHrefWithOptions(relativePath);

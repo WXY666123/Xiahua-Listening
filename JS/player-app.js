@@ -96,48 +96,23 @@
   }
 
   function attachAudioRetry(audio, getUrl, options = {}) {
-    if (!audio || audio.__xiahuaAudioRetryInstalled) return;
-    const maxRetries = Number(options.maxRetries || 3);
-    const getShouldPlay = typeof options.shouldPlay === "function"
-      ? options.shouldPlay
-      : () => !audio.paused;
-    const report = typeof options.report === "function" ? options.report : setStatus;
-
-    const reset = () => {
-      audio.__xiahuaAudioRetryCount = 0;
-    };
-    const retry = () => {
-      const count = Number(audio.__xiahuaAudioRetryCount || 0);
-      if (count >= maxRetries) {
-        report("音频加载失败，请重新进入本题或返回题库后重试。", "error");
-        return;
-      }
-      audio.__xiahuaAudioRetryCount = count + 1;
-      window.clearTimeout(audio.__xiahuaAudioRetryTimer);
-      report("音频加载失败，正在自动重试...", "warn");
-      audio.__xiahuaAudioRetryTimer = window.setTimeout(() => {
-        const url = String(getUrl?.() || audio.currentSrc || audio.src || "").trim();
-        if (!url) return;
-        const shouldPlay = !!getShouldPlay();
-        try {
-          if (audio.src !== url) {
-            audio.src = url;
-          }
-          audio.load?.();
-          if (shouldPlay) {
-            const promise = audio.play?.();
-            if (promise?.catch) promise.catch(() => {});
-          }
-        } catch (error) {
-          console.warn("Audio retry failed:", error);
-        }
-      }, count ? 900 : 300);
-    };
-
-    audio.addEventListener("loadedmetadata", reset);
-    audio.addEventListener("canplay", reset);
-    audio.addEventListener("error", retry);
-    audio.__xiahuaAudioRetryInstalled = true;
+    const control = window.ListeningAudio.attach(audio, getUrl, {
+      ...options, report: options.report || setStatus
+    });
+    const bar = document.querySelector(".topbar, .suite-head");
+    if (bar && !bar.querySelector(".audio-recover")) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "back-link audio-recover";
+      button.textContent = "恢复声音";
+      button.title = "保留当前播放位置，重新连接音频";
+      button.addEventListener("click", () => {
+        const current = isSuiteMode ? control : getFrameWindow()?.document?.querySelector("audio")?.__listeningRecovery;
+        current?.recover();
+      });
+      bar.insertBefore(button, bar.querySelector(".back-link"));
+    }
+    return control;
   }
 
   function installFrameAudioRetry(win = getFrameWindow()) {
@@ -4781,6 +4756,7 @@
     if (!isUsableQuestionHtml(htmlText)) return false;
     clearErrorState();
     hideFrameForSuiteReview();
+    getFrameWindow()?.document?.querySelector("audio")?.__listeningRecovery?.dispose();
     frame.srcdoc = buildSrcdocHtml(htmlText);
     setStatus(statusMessage, statusLevel);
     scheduleSuiteNeighborPreload();
@@ -5115,7 +5091,7 @@
       window.NativeDiskStorage.backToLibrary();
       return;
     }
-    window.location.href = "../index.html";
+    window.location.assign(ROOT_URL.href);
   }
 
   function extractSuiteTestData(htmlText) {
@@ -5547,7 +5523,7 @@
             <div id="suite-title" class="suite-title">套题加载中...</div>
             <div id="suite-status" class="suite-status">正在读取题目...</div>
           </div>
-          <a class="back-link" href="../index.html">返回题库</a>
+          <a class="back-link" href="../">返回题库</a>
         </header>
         <main id="suite-main" class="suite-main">
           <section class="suite-left">
@@ -6735,7 +6711,7 @@
       refs.transcript.hidden = !refs.main.classList.contains("split");
       renderTranscript(refs.main.classList.contains("split"));
     });
-    document.querySelector(".back-link")?.addEventListener("click", handleBackToLibrary);
+    document.querySelector("a.back-link")?.addEventListener("click", handleBackToLibrary);
     const pauseAndPersist = () => {
       state.audio.pause();
       state.checkTickAt = 0;
@@ -6834,7 +6810,7 @@
   on(noteButton, "click", handleNoteToggle);
   on(transcriptButton, "click", handleTranscriptClick);
   on(suiteNextButton, "click", handleSuiteNextClick);
-  on(document.querySelector(".back-link"), "click", handleBackToLibrary);
+  on(document.querySelector("a.back-link"), "click", handleBackToLibrary);
 
   syncSuiteButton();
   if (isSuiteMode) {
