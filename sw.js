@@ -1,5 +1,5 @@
 // Only this site's shell is cached. Audio uses the browser's native Range requests.
-const CACHE = 'xiahua-shell-20260923b';
+const CACHE = 'xiahua-shell-20260926a';
 const ROOT = new URL('./', self.location.href);
 const SHELL = [
   './', 'index.html', 'JS/player.html',
@@ -7,8 +7,8 @@ const SHELL = [
   'JS/library-cache.js?v=20260910b', 'JS/audio-durations.js?v=20260910e',
   'JS/practice-tracker.js?v=20260524e', 'JS/practice-tracker.js?v=20260804a',
   'JS/auth-client.js?v=20260518b', 'JS/auth-client.js?v=20260804a',
-  'JS/suite-practice.js?v=20260824f', 'JS/index-app.js?v=20260923b',
-  'JS/audio-recovery.js?v=20260923b', 'JS/player-app.js?v=20260923b',
+  'JS/suite-practice.js?v=20260926a', 'JS/index-app.js?v=20260926a',
+  'JS/audio-recovery.js?v=20260923b', 'JS/player-app.js?v=20260926a',
   'JS/site-cache.js?v=20260923b'
 ].map(path => new URL(path, ROOT).href);
 self.addEventListener('install', event => {

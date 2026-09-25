@@ -420,7 +420,19 @@
     return changed ? saveStore(store) : store;
   }
 
-  function createSuiteFromItems(items) {
+  function createSelectedSuite(libraryData, selectedPaths, options = {}) {
+    if (!Array.isArray(selectedPaths) || selectedPaths.length !== parts.length) return null;
+    const library = Array.isArray(libraryData) ? libraryData : [];
+    const items = parts.map((part, index) => library.find(item =>
+      (item.p || item.part) === part
+      && normalizePath(item.h || item.path) === normalizePath(selectedPaths[index])
+    ));
+    if (items.some(item => !item)) return null;
+    if (new Set(items.map(item => normalizePath(item.h || item.path))).size !== parts.length) return null;
+    return createSuiteFromItems(items, { ...options, selectionMode: "custom", deferGrading: true });
+  }
+
+  function createSuiteFromItems(items, options = {}) {
     const sourceItems = Array.isArray(items) ? items : [];
     if (sourceItems.length !== parts.length) return null;
     const id = `suite-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
@@ -448,6 +460,9 @@
       estimatedBand: null
     };
     if (suite.items.some((item) => !item.path)) return null;
+    if (options.selectionMode) suite.selectionMode = options.selectionMode;
+    if (options.deferGrading) suite.deferGrading = true;
+    if (options.persist === false) return suite;
     const store = getStore();
     store.suites[id] = suite;
     saveStore(store);
@@ -623,6 +638,7 @@
   function getResumeIndex(suite) {
     if (!suite) return 0;
     const items = suite.items || [];
+    if (suite.deferGrading) return Math.max(0, Math.min(Number(suite.currentIndex || 0), items.length - 1));
     const firstUnfinished = items.findIndex((_, index) => !suite.results?.[String(index)]);
     if (firstUnfinished >= 0) return firstUnfinished;
     return Math.max(0, Math.min(Number(suite.currentIndex || 0), items.length - 1));
@@ -645,6 +661,7 @@
     persistSuite,
     reconcileStoreWithLibrary,
     createSuiteFromItems,
+    createSelectedSuite,
     getSuite,
     listSuites,
     deleteSuite,

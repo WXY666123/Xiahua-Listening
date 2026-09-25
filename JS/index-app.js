@@ -645,7 +645,7 @@
     return [];
   }
 
-  const PLAYER_VERSION = "20260923b";
+  const PLAYER_VERSION = "20260926a";
 
   function buildQuestionHref(relativePath) {
     return buildQuestionHrefWithOptions(relativePath);
@@ -2849,6 +2849,99 @@
     openSuitePlayer(suitePractice.getSuiteUrl(suite.id, 0));
   }
 
+  const customSuiteChoices = {};
+  const customSuiteSearches = {};
+  let customSuiteStarting = false;
+
+  function createCustomSuitePicker() {
+    const parts = ["P1", "P2", "P3", "P4"];
+    const library = getSuiteLibraryData(loadLibraryData());
+    const panel = document.createElement("fieldset");
+    panel.className = "custom-suite";
+    panel.disabled = customSuiteStarting;
+    panel.appendChild(createTextElement("legend", "suite-title", "自选套题"));
+    panel.appendChild(createTextElement("p", "suite-desc", "每个 Part 选择一篇，组成完整套题。切换题目只保存草稿，最后统一提交并查看答案。"));
+    const grid = document.createElement("div");
+    grid.className = "custom-suite-grid";
+    const feedback = createTextElement("p", "suite-desc", "");
+    feedback.setAttribute("role", "status");
+    const start = createActionButton("开始自选套题", { variant: "primary" });
+    const updateStart = () => {
+      const count = parts.filter(part => customSuiteChoices[part]).length;
+      start.disabled = count !== 4 || customSuiteStarting;
+      feedback.textContent = `已选 ${count}/4 篇${count === 4 ? "，可以开始练习。" : "，请分别选择 P1–P4。"}`;
+    };
+    parts.forEach(part => {
+      const candidates = library.filter(item => item.p === part).sort((a, b) =>
+        cleanDisplayTitle(a.t).localeCompare(cleanDisplayTitle(b.t), "zh-CN", { numeric: true })
+      );
+      if (!candidates.some(item => item.h === customSuiteChoices[part])) customSuiteChoices[part] = "";
+      const card = document.createElement("div");
+      const label = createTextElement("label", "suite-part-label", `${part} · 选择题目`);
+      label.htmlFor = `custom-suite-${part}`;
+      const search = document.createElement("input");
+      search.type = "search";
+      search.placeholder = `搜索 ${part} 题号或名称`;
+      search.setAttribute("aria-label", search.placeholder);
+      search.value = customSuiteSearches[part] || "";
+      const select = document.createElement("select");
+      select.id = label.htmlFor;
+      const renderOptions = () => {
+        const query = search.value.trim().toLowerCase();
+        const matches = candidates.filter(item => `${item.t} ${item.f}`.toLowerCase().includes(query));
+        select.replaceChildren();
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = matches.length ? `请选择 ${part}（${matches.length} 篇匹配）` : "没有匹配题目，请更换关键词";
+        select.appendChild(placeholder);
+        candidates.filter(item => matches.includes(item) || item.h === customSuiteChoices[part]).forEach(item => {
+          const option = document.createElement("option");
+          option.value = item.h;
+          option.textContent = `${cleanDisplayTitle(item.t)} · ${item.f}`;
+          select.appendChild(option);
+        });
+        select.value = customSuiteChoices[part] || "";
+      };
+      search.addEventListener("input", () => { customSuiteSearches[part] = search.value; renderOptions(); });
+      select.addEventListener("change", () => { customSuiteChoices[part] = select.value; updateStart(); });
+      renderOptions();
+      card.append(label, search, select);
+      grid.appendChild(card);
+    });
+    start.addEventListener("click", async () => {
+      if (customSuiteStarting) return;
+      const paths = parts.map(part => customSuiteChoices[part]);
+      customSuiteStarting = true;
+      panel.disabled = true;
+      feedback.textContent = "正在检查所选题目…";
+      try {
+        const verified = getSuiteLibraryData(await getVerifiedSuiteLibraryData());
+        const candidate = suitePractice?.createSelectedSuite?.(verified, paths, { persist: false });
+        if (!candidate) throw new Error("所选题目已不可用，请重新选择 P1–P4。 ");
+        for (const item of candidate.items) {
+          let html = window.NativeDiskStorage?.readQuestionHtml?.(item.path) || "";
+          if (!html) html = await window.LibraryCache?.ensureQuestionHtml?.(item.path, null, { silent: true });
+          const match = String(html || "").match(/<script\s+id=["']test-data["']\s+type=["']application\/json["']>([\s\S]*?)<\/script>/i);
+          if (!match || !Array.isArray(JSON.parse(match[1])?.groups)) {
+            throw new Error(`${item.part}「${cleanDisplayTitle(item.title)}」加载失败，请检查网络后重试。`);
+          }
+        }
+        const suite = suitePractice.persistSuite(candidate);
+        if (!suite) throw new Error("套题保存失败，请重试。");
+        openSuitePlayer(suitePractice.getSuiteUrl(suite.id, 0));
+      } catch (error) {
+        feedback.textContent = error.message || "题目读取失败，请检查网络后重试。";
+      } finally {
+        customSuiteStarting = false;
+        panel.disabled = false;
+        start.disabled = parts.some(part => !customSuiteChoices[part]);
+      }
+    });
+    updateStart();
+    panel.append(grid, feedback, start);
+    return panel;
+  }
+
   function openSuitePlayer(url) {
     if (!url) return;
     if (window.NativeDiskStorage?.isWebLibrary) {
@@ -2877,7 +2970,7 @@
       clearQuestionPlayerState(relativePath);
       await clearQuestionLocalState(relativePath);
     }));
-    const nextSuite = suitePractice.createSuiteFromItems?.(suite.items);
+    const nextSuite = suitePractice.createSuiteFromItems?.(suite.items, { selectionMode: suite.selectionMode, deferGrading: suite.deferGrading });
     if (!nextSuite) {
       notify("重做套题失败，请重新随机生成套题。");
       return;
@@ -3120,6 +3213,7 @@
     actions.appendChild(createActionButton("随机生成套题", { variant: suite && !suite.completedAt ? "" : "primary", onClick: startSuitePractice }));
     head.append(copy, actions);
     fragment.appendChild(head);
+    fragment.appendChild(createCustomSuitePicker());
 
     const history = document.createElement("div");
     history.className = "suite-history";

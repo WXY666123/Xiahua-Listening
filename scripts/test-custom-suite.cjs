@@ -1,0 +1,14 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+function setup(){const data=new Map();const window={localStorage:{getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v)},dispatchEvent(){}}; vm.runInNewContext(fs.readFileSync('JS/suite-practice.js','utf8'),{window,console,URLSearchParams,CustomEvent:class{}});const library=['P1','P2','P3','P4'].map((p,i)=>({p,s:'普通',f:'高频',t:`${i+1}. ${p} Test`,h:`普通/${p}/高频/Test${i}/test.html`}));return{api:window.SuitePractice,data,library,paths:library.map(i=>i.h)};}
+test('custom suite preserves exact choices in P1-P4 order and defers grading',()=>{const s=setup(); const result=s.api.createSelectedSuite(s.library,s.paths,{persist:false});assert.deepEqual(Array.from(result.items,i=>i.path),s.paths);assert.equal(result.deferGrading,true);assert.equal(result.selectionMode,'custom');assert.equal(s.data.size,0);});
+test('incomplete or wrong-part selections are rejected without storage writes',()=>{const s=setup();for(const paths of [s.paths.slice(1),[s.paths[1],s.paths[0],...s.paths.slice(2)],[s.paths[0],s.paths[0],...s.paths.slice(2)]])assert.equal(s.api.createSelectedSuite(s.library,paths),null);assert.equal(s.data.size,0);});
+test('unavailable paths cannot be selected from outside the visible library',()=>{const s=setup();assert.equal(s.api.createSelectedSuite(s.library.slice(1),s.paths),null);assert.equal(s.data.size,0);});
+test('selected suite persists through existing suite records and starts with no answers',()=>{const s=setup();const result=s.api.createSelectedSuite(s.library,s.paths);const saved=s.api.getSuite(result.id);assert.equal(saved.items.length,4);assert.equal(saved.completedAt,'');assert.deepEqual(Object.keys(saved.results),[]);assert.equal(saved.deferGrading,true);});
+test('custom unfinished suite resumes the selected part without graded results',()=>{const s=setup();const suite=s.api.createSelectedSuite(s.library,s.paths);s.api.setCurrentIndex(suite.id,2);assert.equal(s.api.getResumeIndex(s.api.getSuite(suite.id)),2);});
+test('moving between custom parts never grades; random suites retain their behavior',()=>{
+ const source=fs.readFileSync('JS/player-app.js','utf8');const body=source.split('    const goToPart = (nextIndex, options = {}) => {')[1].split('    const finishSuite')[0];
+ for(const custom of [true,false]){let grades=0;let drafts=0;const context={state:{suite:{items:[{path:'p1',part:'P1'},{path:'p2',part:'P2'}],deferGrading:custom},index:0,parts:[{},{}]},explicitSuiteReview:false,collectInputs:()=>drafts++,saveCurrentPart:()=>grades++,window:{SuitePractice:{setCurrentIndex(){}}},suiteId:'test',renderPart(){},loadAudioPart(){},setSuiteStatus(){}};vm.runInNewContext('const goToPart=(nextIndex,options={})=>{'+body+';goToPart(1);',context);assert.equal(drafts,1);assert.equal(grades,custom?0:1);assert.equal(context.state.index,1);}
+});

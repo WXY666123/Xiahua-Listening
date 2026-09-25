@@ -6416,7 +6416,7 @@
         syncSuiteQuestionAnalysisShortcuts();
       }
       ensureAudioReady();
-      setSuiteStatus(currentSuite.completedAt ? getSuiteSummaryText(currentSuite) : "套题作答中，音频会连续播放。", currentSuite.completedAt ? "ok" : "warn");
+      setSuiteStatus(currentSuite.completedAt ? getSuiteSummaryText(currentSuite) : (currentSuite.deferGrading ? "自选套题作答中，全部完成后统一提交查看答案。" : "套题作答中，音频会连续播放。"), currentSuite.completedAt ? "ok" : "warn");
     };
 
     const unwrapSuiteHighlight = (element) => {
@@ -6640,7 +6640,7 @@
     const goToPart = (nextIndex, options = {}) => {
       collectInputs();
       const leavingFinalPart = state.index >= state.parts.length - 1;
-      if (!state.suite.completedAt && !explicitSuiteReview && options.save !== false && !leavingFinalPart) {
+      if (!state.suite.completedAt && !explicitSuiteReview && options.save !== false && !leavingFinalPart && !state.suite.deferGrading) {
         saveCurrentPart();
       }
       state.index = Math.max(0, Math.min(nextIndex, state.parts.length - 1));

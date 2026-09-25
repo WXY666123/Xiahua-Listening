@@ -11,3 +11,12 @@
 - 验证：`node --test scripts/test-recovery.cjs scripts/test-site-cache.cjs`；修改脚本的 `node --check`；`git diff --check`。
 - 本地浏览器验证：普通题播放、恢复后进度保留；套题播放至 23 秒后恢复声音保持进度并继续播放，模拟断网返回题库显示 130 篇。iPad 实际声道中断尚未复现，需设备验收。缓存首次建立前仍依赖网络；不承诺全部题目和音频离线可用。
 - 发布范围：根目录 `index.html`、`sw.js` 与修改/新增的 `JS/` 文件。发布版本：20260923b。
+
+
+## 自选套题（20260926a）
+
+在「套题匹配 → 自选套题」中，分别搜索并选择 P1、P2、P3、P4 的一篇题目，再点击「开始自选套题」。作答期间可用 Previous / Next 切换，最后在 P4 点击 Finish 统一交卷并查看 40 题成绩及解析。
+
+自选套题切换时只保存草稿，提交前不生成单篇批改记录；重新进入可继续上次所在 Part。原有随机套题保留，既有题库和存储键不变。修改了脚本版本及离线缓存版本，发布时需一并上传。
+
+验证：`node --test scripts/test-custom-suite.cjs scripts/test-recovery.cjs scripts/test-site-cache.cjs`。本地浏览器已验证搜索、四篇精确组合、跨 Part 保留答案、刷新恢复草稿、提交前不批改，以及统一提交后生成四部分共 40 题成绩并解锁回看。尚未在真实 iPad 上验收。
